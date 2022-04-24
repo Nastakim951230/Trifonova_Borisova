@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fon"
+    tools:context=".vhod">
+
+    <EditText
+        android:id="@+id/password"
+
+        android:layout_width="381dp"
+        android:layout_height="73dp"
+
+
+        android:ems="10"
+        android:hint="Пароль"
+        android:password="true"
+        android:textAlignment="center"
+        android:textColor="@color/material_dynamic_tertiary10"
+        app:layout_constraintBottom_toTopOf="@+id/registr2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <EditText
+        android:id="@+id/familio"
+
+        android:layout_width="381dp"
+        android:layout_height="73dp"
+
+        android:hint="Фамилия"
+        android:textAlignment="center"
+        android:textColor="@color/material_dynamic_tertiary10"
+        app:layout_constraintBottom_toTopOf="@+id/name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.575">
+
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/name"
+
+        android:layout_width="381dp"
+        android:layout_height="73dp"
+        android:hint="Имя"
+        android:textAlignment="center"
+        android:textColor="@color/material_dynamic_tertiary10"
+        app:layout_constraintBottom_toTopOf="@+id/othestvo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/familio">
+
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/othestvo"
+
+        android:layout_width="381dp"
+        android:layout_height="73dp"
+
+        android:hint="Отчество"
+        android:textAlignment="center"
+        android:textColor="@color/material_dynamic_tertiary10"
+        app:layout_constraintBottom_toTopOf="@+id/username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name">
+
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/username"
+
+        android:layout_width="381dp"
+        android:layout_height="73dp"
+
+        android:hint="Логин"
+        android:textAlignment="center"
+        android:textColor="@color/material_dynamic_tertiary10"
+        app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/othestvo">
+
+
+    </EditText>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/registr2"
+        android:layout_width="153dp"
+        android:layout_height="49dp"
+
+        android:background="@drawable/style"
+        android:text="Регистрация"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+</androidx.constraintlayout.widget.ConstraintLayout>

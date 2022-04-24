@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Avtorizatsia</string>
+    <string name="buy">Корзина</string>
+    <string name="button_buy">Купить товар</string>
+    <string name="list_flights">Список товаров</string>
+    <string name="etPrice">Товар</string>
+    <string name="quantity">Кол-во</string>
+</resources>
