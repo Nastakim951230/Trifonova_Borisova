@@ -71,24 +71,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.Vhod:
                 Cursor logcursor=database.query(DBHelper.TABLE_USERS, null, null, null, null, null, null);
-
+                Cursor logcursors=database.query(DBHelper.TABLE_SOTRYDNIK, null, null, null, null, null, null);
                 boolean loqqed=false;
                 if (logcursor.moveToFirst()){
                     int usernameIndex=logcursor.getColumnIndex(DBHelper.KEY_USER);
                     int passwordIndex=logcursor.getColumnIndex(DBHelper.KEY_PASSWORD);
-                    int usernameSIndex=logcursor.getColumnIndex(DBHelper.KEY_USERs);
-                    int passwordSIndex=logcursor.getColumnIndex(DBHelper.KEY_PASSWORDs);
+
                     do{
                         if(usernameField.getText().toString().equals(adminUser) && passwordField.getText().toString().equals(adminPassword)) {
                             startActivity(new Intent(this, vhod.class));
                             loqqed = true;
                             break;
                         }
-                        if(usernameField.getText().toString().equals(logcursor.getString(usernameSIndex))&& passwordField.getText().toString().equals(logcursor.getString(passwordSIndex))){
-                            startActivity(new Intent(this,BD.class));
-                            loqqed=true;
-                            break;
-                        }
+
                         if(usernameField.getText().toString().equals(logcursor.getString(usernameIndex))&& passwordField.getText().toString().equals(logcursor.getString(passwordIndex))){
                             startActivity(new Intent(this,tovar.class));
                             loqqed=true;
@@ -96,6 +91,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }while (logcursor.moveToNext());
                 }
+                if (logcursors.moveToFirst()){
+
+                    int usernameSIndex=logcursors.getColumnIndex(DBHelper.KEY_USERs);
+                    int passwordSIndex=logcursors.getColumnIndex(DBHelper.KEY_PASSWORDs);
+                    do{
+
+                        if(usernameField.getText().toString().equals(logcursors.getString(usernameSIndex))&& passwordField.getText().toString().equals(logcursors.getString(passwordSIndex))){
+                            startActivity(new Intent(this,BD.class));
+                            loqqed=true;
+                            break;
+                        }
+                    }while (logcursors.moveToNext());
+                }
+                logcursors.close();
                 logcursor.close();
                 if(!loqqed) Toast.makeText(this,"Введенная комбинация логина и пароля не была найдина.",Toast.LENGTH_LONG).show();
 

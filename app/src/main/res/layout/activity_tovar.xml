@@ -51,11 +51,11 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toBottomOf="@id/heading" />
 
-  <androidx.appcompat.widget.AppCompatButton
+  <TextView
       android:id="@+id/heading"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@drawable/style"
+      android:background="@color/ceredinafon"
       android:text="@string/buy"
       android:textAlignment="center"
       android:textColor="@color/material_dynamic_tertiary10"
