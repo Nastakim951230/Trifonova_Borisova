@@ -22,9 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String KEY_PRICE = "price";
 
     public static final String KEY_IDs = "_id";
-    public static final String KEY_NAME="name";
-    public static final String KEY_FAMILIA="familia";
-    public static final String KEY_OTHESTVO="othestvo";
+    public static final String KEY_FIO="fio";
     public static final String KEY_USERs = "user";
     public static final String KEY_PASSWORDs = "password";
 
@@ -40,7 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + TABLE_CONTACTS + "(" + KEY_ID
                 + " integer primary key,"  + KEY_TOVAR + " text," + KEY_KOLVO + " text," +  KEY_PRICE + " text" + ")");
 
-        db.execSQL("create table " + TABLE_SOTRYDNIK+"("+KEY_IDs+"integer primary key,"+KEY_NAME+"text,"+KEY_FAMILIA+"text,"+KEY_OTHESTVO+"text,"+KEY_USERs+"text,"+KEY_PASSWORDs+"text"+")");
+        db.execSQL("create table " + TABLE_SOTRYDNIK+"("+KEY_IDs+"integer primary key,"+KEY_FIO+"text,"+KEY_PASSWORDs+"text"+")");
 
     }
 
