@@ -18,13 +18,11 @@ import android.widget.TextView;
 
 public class vhod extends AppCompatActivity implements View.OnClickListener{
 
-    Button btnAdds, btnClears,snazad;
-    EditText etFIO, etLogin, etPassword;
-
-    DBHelper dbHelper;
+    Button btnAdds,  btnClears, btnNazads;
+    EditText etFio, etLogin, etParol;
     SQLiteDatabase database;
-    ContentValues contentValuesv;
-
+    DBHelper dbHelper;
+    ContentValues contentValuesw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,72 +30,71 @@ public class vhod extends AppCompatActivity implements View.OnClickListener{
         btnAdds = (Button) findViewById(R.id.btnAdds);
         btnAdds.setOnClickListener(this);
 
-        snazad=(Button)findViewById(R.id.snazad);
-        snazad.setOnClickListener(this);
+        btnNazads=(Button)  findViewById(R.id.snazad);
+        btnNazads.setOnClickListener(this);
 
         btnClears = (Button) findViewById(R.id.btnClears);
         btnClears.setOnClickListener(this);
 
-        etFIO = findViewById(R.id.FIO);
-        etLogin = findViewById(R.id.Login);
-        etPassword = findViewById(R.id.Passwords);
 
+        etFio=(EditText) findViewById(R.id.etFio);
+        etLogin = (EditText) findViewById(R.id.etLogin);
+        etParol=(EditText) findViewById(R.id.etParol);
         dbHelper = new DBHelper(this);
-        database = dbHelper.getWritableDatabase();
-
+        database=dbHelper.getWritableDatabase();
 
         UpdateTable();
     }
-    public void UpdateTable() {
+    public void UpdateTable(){
         Cursor cursor = database.query(DBHelper.TABLE_SOTRYDNIK, null, null, null, null, null, null);
-        TableLayout Output = findViewById(R.id.Outrut);
-        Output.removeAllViews();
+
+        TableLayout dbOutput=findViewById(R.id.Outrut);
+        dbOutput.removeAllViews();
         if (cursor.moveToFirst()) {
-            int idIndex = cursor.getColumnIndex(DBHelper.KEY_IDs);
-            int FIOIndex = cursor.getColumnIndex(DBHelper.KEY_FIO);
-            int LoginIndex = cursor.getColumnIndex(DBHelper.KEY_USERs);
-            int PasswordIndex = cursor.getColumnIndex(DBHelper.KEY_PASSWORDs);
-            do {
-                TableRow dbOutputRow = new TableRow(this);
+            int idIndexs = cursor.getColumnIndex(DBHelper.KEY_IDs);
+            int fioIndex= cursor.getColumnIndex(DBHelper.KEY_FIO);
+            int LOGINIndex = cursor.getColumnIndex(DBHelper.KEY_USERs);
+            int ParolIndex = cursor.getColumnIndex(DBHelper.KEY_PASSWORDs);
+            do{
+                TableRow dbOutputRow=new TableRow(this);
                 dbOutputRow.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
-                TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+                TableRow.LayoutParams params=new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
 
-                TextView outputID = new TextView(this);
-                params.weight = 1.0f;
+                TextView outputID= new TextView(this);
+                params.weight=1.0f;
                 outputID.setLayoutParams(params);
-                outputID.setText(cursor.getString(idIndex));
+                outputID.setText(cursor.getString(idIndexs));
                 dbOutputRow.addView(outputID);
 
-                TextView outputFIO = new TextView(this);
-                params.weight = 3.0f;
-                outputFIO.setLayoutParams(params);
-                outputFIO.setText(cursor.getString(FIOIndex));
-                dbOutputRow.addView(outputFIO);
 
-                TextView outputLogin = new TextView(this);
-                params.weight = 3.0f;
+                TextView outputFio= new TextView(this);
+                params.weight=3.0f;
+                outputFio.setLayoutParams(params);
+                outputFio.setText(cursor.getString(fioIndex));
+                dbOutputRow.addView(outputFio);
+
+                TextView outputLogin= new TextView(this);
+                params.weight=3.0f;
                 outputLogin.setLayoutParams(params);
-                outputLogin.setText(cursor.getString(LoginIndex));
+                outputLogin.setText(cursor.getString(LOGINIndex));
                 dbOutputRow.addView(outputLogin);
 
-                TextView outputPassword = new TextView(this);
-                params.weight = 3.0f;
-                outputPassword.setLayoutParams(params);
-                outputPassword.setText(cursor.getString(PasswordIndex));
-                dbOutputRow.addView(outputPassword);
+                TextView outputParol= new TextView(this);
+                params.weight=3.0f;
+                outputParol.setLayoutParams(params);
+                outputParol.setText(cursor.getString(ParolIndex));
+                dbOutputRow.addView(outputParol);
 
-
-
-                Button deleteBtn = new Button(this);
+                Button deleteBtn= new Button(this);
                 deleteBtn.setOnClickListener(this);
                 params.weight=1.0f;
                 deleteBtn.setLayoutParams(params);
-                deleteBtn.setText("Удалить");
-                deleteBtn.setId(cursor.getInt(idIndex));
+                deleteBtn.setText("Удалить запись");
+                deleteBtn.setId(cursor.getInt(idIndexs));
                 dbOutputRow.addView(deleteBtn);
 
-                Output.addView(dbOutputRow);
+                dbOutput.addView(dbOutputRow);
 
             } while (cursor.moveToNext());
         }
@@ -108,68 +105,66 @@ public class vhod extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.btnAdds: //Добавление данных в БД
+            case R.id.btnAdds:
 
-                String fio = etFIO.getText().toString();
-                String logins = etLogin.getText().toString();
-                String passwords = etPassword.getText().toString();
+                String fio = etFio.getText().toString();
+                String login = etLogin.getText().toString();
+                String parol = etParol.getText().toString();
 
-                contentValuesv = new ContentValues();
+                contentValuesw = new ContentValues();
 
-                contentValuesv.put(DBHelper.KEY_FIO, fio);
-                contentValuesv.put(DBHelper.KEY_USERs, logins);
-                contentValuesv.put(DBHelper.KEY_PASSWORDs, passwords);
+                contentValuesw.put(DBHelper.KEY_FIO, fio);
+                contentValuesw.put(DBHelper.KEY_USERs, login);
+                contentValuesw.put(DBHelper.KEY_PASSWORDs, parol);
 
-                database.insert(DBHelper.TABLE_SOTRYDNIK, null, contentValuesv);
+                database.insert(DBHelper.TABLE_SOTRYDNIK, null, contentValuesw);
 
                 UpdateTable();
                 break;
 
-            case R.id.btnClears: //Удаление данных из БД
+            case R.id.btnClears:
                 database.delete(DBHelper.TABLE_SOTRYDNIK, null, null);
-                TableLayout dbOutput = findViewById(R.id.dbOutput);
+                TableLayout dbOutput=findViewById(R.id.Outrut);
                 dbOutput.removeAllViews();
                 UpdateTable();
                 break;
-
             default:
-                View outputDBRow = (View) v.getParent();
-                ViewGroup outputDB = (ViewGroup) outputDBRow.getParent();
+                View outputDBRow =(View) v.getParent();
+                ViewGroup outputDB =(ViewGroup) outputDBRow.getParent();
                 outputDB.removeView(outputDBRow);
                 outputDB.invalidate();
 
+                database.delete(DBHelper.TABLE_SOTRYDNIK, DBHelper.KEY_ID+"=?", new String[]{String.valueOf(v.getId())});
 
-                database.delete(DBHelper.TABLE_SOTRYDNIK, DBHelper.KEY_IDs+" = ?", new String[]{String.valueOf((v.getId()))});
-                contentValuesv = new ContentValues();
+                contentValuesw=new ContentValues();
                 Cursor cursorUpdater = database.query(DBHelper.TABLE_SOTRYDNIK, null, null, null, null, null, null);
-                if(cursorUpdater.moveToFirst()) {
-                    int idIndex = cursorUpdater.getColumnIndex(DBHelper.KEY_IDs);
-                    int FIOIndex = cursorUpdater.getColumnIndex(DBHelper.KEY_FIO);
+                if (cursorUpdater.moveToFirst()) {
+                    int idsIndex = cursorUpdater.getColumnIndex(DBHelper.KEY_IDs);
+
+                    int fioIndex=cursorUpdater.getColumnIndex(DBHelper.KEY_FIO);
                     int LoginIndex = cursorUpdater.getColumnIndex(DBHelper.KEY_USERs);
-                    int PasswordIndex = cursorUpdater.getColumnIndex(DBHelper.KEY_PASSWORDs);
+                    int ParolIndex = cursorUpdater.getColumnIndex(DBHelper.KEY_PASSWORDs);
+                    int realID=1;
+                    do{
+                        if(cursorUpdater.getInt(idsIndex)>realID)
+                        {
+                            contentValuesw.put(DBHelper.KEY_IDs,realID);
 
-                    int realID = 1;
-                    do {
-                        if (cursorUpdater.getInt(idIndex) > realID) {
-                            contentValuesv.put(DBHelper.KEY_IDs, realID);
-                            contentValuesv.put(DBHelper.KEY_FIO, cursorUpdater.getString(FIOIndex));
-                            contentValuesv.put(DBHelper.KEY_USERs, cursorUpdater.getString(LoginIndex));
-                            contentValuesv.put(DBHelper.KEY_PASSWORDs, cursorUpdater.getString(PasswordIndex));
-
-
-                            database.replace(DBHelper.TABLE_SOTRYDNIK, null, contentValuesv);
+                            contentValuesw.put(DBHelper.KEY_FIO,cursorUpdater.getString(fioIndex));
+                            contentValuesw.put(DBHelper.KEY_USERs,cursorUpdater.getString(LoginIndex));
+                            contentValuesw.put(DBHelper.KEY_PASSWORDs,cursorUpdater.getString(ParolIndex));
+                            database.replace(DBHelper.TABLE_SOTRYDNIK,null,contentValuesw);
                         }
                         realID++;
-                    } while (cursorUpdater.moveToNext());
-                    if (cursorUpdater.moveToLast()) {
-                        database.delete(DBHelper.TABLE_SOTRYDNIK, DBHelper.KEY_IDs + " = ?", new String[]{cursorUpdater.getString(idIndex)});
+                    }while (cursorUpdater.moveToNext());
+                    if(cursorUpdater.moveToLast()){
+                        database.delete(DBHelper.TABLE_SOTRYDNIK,DBHelper.KEY_IDs+"=?",new String[]{cursorUpdater.getString(idsIndex)});
                     }
                     UpdateTable();
-
                 }
-                cursorUpdater.close();
+
                 break;
-            case R.id.snazad: //выход назад
+            case R.id.snazad:
                 Intent intent=new Intent(this,MainActivity.class);
                 startActivity(intent);
                 break;

@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String adminUser = "admin";
     String adminPassword = "admin";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             loqqed=true;
                             break;
                         }
+
                     }while (logcursor.moveToNext());
                 }
                 if (logcursors.moveToFirst()){

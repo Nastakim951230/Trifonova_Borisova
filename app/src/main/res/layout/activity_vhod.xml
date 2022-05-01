@@ -8,69 +8,64 @@
     tools:context=".vhod">
 
     <EditText
-        android:id="@+id/FIO"
+        android:id="@+id/etFio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         android:hint="ФИО"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/Login"
+        app:layout_constraintBottom_toTopOf="@+id/etLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></EditText>
 
     <EditText
-        android:id="@+id/Login"
+        android:id="@+id/etLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         android:hint="Логин"
+
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/Passwords"
+        app:layout_constraintBottom_toTopOf="@+id/etParol"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FIO"
+        app:layout_constraintTop_toBottomOf="@+id/etFio"
         app:layout_constraintVertical_bias="0.0"></EditText>
 
     <EditText
-        android:id="@+id/Passwords"
+        android:id="@+id/etParol"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         android:hint="Пароль"
-        android:password="true"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Login"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/etLogin"></EditText>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
+        android:id="@+id/btnClears"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Удаление"
+        app:layout_constraintStart_toEndOf="@+id/btnAdds"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etParol"></Button>
+
+    <Button
         android:id="@+id/btnAdds"
-        android:layout_width="124dp"
-        android:layout_height="48dp"
-        android:background="@drawable/style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Добавление"
-        app:layout_constraintBottom_toTopOf="@+id/Outrut"
         app:layout_constraintEnd_toStartOf="@+id/btnClears"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Passwords"></androidx.appcompat.widget.AppCompatButton>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnClears"
-        android:layout_width="113dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="2dp"
-        android:background="@drawable/style"
-        android:text="Удаление"
-        app:layout_constraintBottom_toTopOf="@+id/Outrut"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnAdds"
-        app:layout_constraintTop_toBottomOf="@+id/Passwords"></androidx.appcompat.widget.AppCompatButton>
+        app:layout_constraintTop_toBottomOf="@+id/etParol"></Button>
 
     <TableLayout
         android:id="@+id/Outrut"
@@ -99,17 +94,15 @@
             android:layout_height="125dp" />
     </TableLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/snazad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="298dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/style"
+        android:layout_marginBottom="22dp"
         android:text="Назад"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.162"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

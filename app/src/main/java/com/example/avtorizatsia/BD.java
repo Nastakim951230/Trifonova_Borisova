@@ -48,7 +48,7 @@ public class BD extends AppCompatActivity implements View.OnClickListener{
     public void UpdateTable(){
         Cursor cursor = database.query(DBHelper.TABLE_CONTACTS, null, null, null, null, null, null);
 
-        TableLayout dbOutput=findViewById(R.id.dbOutput);
+        TableLayout dbOutput=findViewById(R.id.dbOutrut);
         dbOutput.removeAllViews();
         if (cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
@@ -118,13 +118,16 @@ public class BD extends AppCompatActivity implements View.OnClickListener{
                 contentValues.put(DBHelper.KEY_PRICE, price);
 
                 database.insert(DBHelper.TABLE_CONTACTS, null, contentValues);
+                etTovar.setText("");
+                etKolvo.setText("");
+                etPrice.setText("");
 
                 UpdateTable();
                 break;
 
             case R.id.btnClear:
                 database.delete(DBHelper.TABLE_CONTACTS, null, null);
-                TableLayout dbOutput=findViewById(R.id.dbOutput);
+                TableLayout dbOutput=findViewById(R.id.dbOutrut);
                 dbOutput.removeAllViews();
                 UpdateTable();
                 break;
