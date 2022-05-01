@@ -48,7 +48,7 @@ public class BD extends AppCompatActivity implements View.OnClickListener{
     public void UpdateTable(){
         Cursor cursor = database.query(DBHelper.TABLE_CONTACTS, null, null, null, null, null, null);
 
-        TableLayout dbOutput=findViewById(R.id.dbOutrut);
+        TableLayout dbOutput=findViewById(R.id.dbOutput);
         dbOutput.removeAllViews();
         if (cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
@@ -124,7 +124,7 @@ public class BD extends AppCompatActivity implements View.OnClickListener{
 
             case R.id.btnClear:
                 database.delete(DBHelper.TABLE_CONTACTS, null, null);
-                TableLayout dbOutput=findViewById(R.id.dbOutrut);
+                TableLayout dbOutput=findViewById(R.id.Outrut);
                 dbOutput.removeAllViews();
                 UpdateTable();
                 break;

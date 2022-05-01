@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class vhod extends AppCompatActivity implements View.OnClickListener{
 
@@ -24,7 +23,7 @@ public class vhod extends AppCompatActivity implements View.OnClickListener{
 
     DBHelper dbHelper;
     SQLiteDatabase database;
-    ContentValues contentValues;
+    ContentValues contentValuesv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +32,8 @@ public class vhod extends AppCompatActivity implements View.OnClickListener{
         btnAdds = (Button) findViewById(R.id.btnAdds);
         btnAdds.setOnClickListener(this);
 
+        snazad=(Button)findViewById(R.id.snazad);
+        snazad.setOnClickListener(this);
 
         btnClears = (Button) findViewById(R.id.btnClears);
         btnClears.setOnClickListener(this);
@@ -44,39 +45,20 @@ public class vhod extends AppCompatActivity implements View.OnClickListener{
         dbHelper = new DBHelper(this);
         database = dbHelper.getWritableDatabase();
 
-        etFIO.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus)
-                etFIO.setHint("");
-            else
-                etFIO.setHint("ФИО");
-        });
 
-        etLogin.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus)
-                etLogin.setHint("");
-            else
-                etLogin.setHint("Логин");
-        });
-
-        etPassword.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus)
-                etPassword.setHint("");
-            else
-                etPassword.setHint("Пароль");
-        });
         UpdateTable();
     }
     public void UpdateTable() {
         Cursor cursor = database.query(DBHelper.TABLE_SOTRYDNIK, null, null, null, null, null, null);
-
+        TableLayout dbOutput = findViewById(R.id.Outrut);
+        dbOutput.removeAllViews();
         if (cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex(DBHelper.KEY_IDs);
             int FIOIndex = cursor.getColumnIndex(DBHelper.KEY_FIO);
             int LoginIndex = cursor.getColumnIndex(DBHelper.KEY_USERs);
             int PasswordIndex = cursor.getColumnIndex(DBHelper.KEY_PASSWORDs);
 
-            TableLayout dbOutput = findViewById(R.id.dbOutput);
-            dbOutput.removeAllViews();
+
             do {
                 TableRow dbOutputRow = new TableRow(this);
                 dbOutputRow.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -128,24 +110,26 @@ public class vhod extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.btnAdds:
-                String Fio = etFIO.getText().toString();
-                String login = etLogin.getText().toString();
-                String password = etPassword.getText().toString();
+            case R.id.btnAdds: //Добавление данных в БД
 
-                contentValues = new ContentValues();
-                contentValues.put(DBHelper.KEY_FIO, Fio);
-                contentValues.put(DBHelper.KEY_USERs, login);
-                contentValues.put(DBHelper.KEY_PASSWORDs, password);
-                database.insert(DBHelper.TABLE_SOTRYDNIK, null, contentValues);
+                String fio = etFIO.getText().toString();
+                String logins = etLogin.getText().toString();
+                String passwords = etPassword.getText().toString();
+
+                contentValuesv = new ContentValues();
+
+                contentValuesv.put(DBHelper.KEY_FIO, fio);
+                contentValuesv.put(DBHelper.KEY_USERs, logins);
+                contentValuesv.put(DBHelper.KEY_PASSWORDs, passwords);
+
+                database.insert(DBHelper.TABLE_SOTRYDNIK, null, contentValuesv);
+
                 UpdateTable();
-                etFIO.setText("");
-                etLogin.setText("");
-                etPassword.setText("");
+
 
                 break;
 
-            case R.id.btnClears:
+            case R.id.btnClears: //Удаление данных из БД
                 database.delete(DBHelper.TABLE_SOTRYDNIK, null, null);
                 TableLayout dbOutput = findViewById(R.id.dbOutput);
                 dbOutput.removeAllViews();
@@ -160,7 +144,7 @@ public class vhod extends AppCompatActivity implements View.OnClickListener{
 
 
                 database.delete(DBHelper.TABLE_SOTRYDNIK, DBHelper.KEY_IDs+" = ?", new String[]{String.valueOf((v.getId()))});
-                contentValues = new ContentValues();
+                contentValuesv = new ContentValues();
                 Cursor cursorUpdater = database.query(DBHelper.TABLE_SOTRYDNIK, null, null, null, null, null, null);
                 if(cursorUpdater.moveToFirst()) {
                     int idIndex = cursorUpdater.getColumnIndex(DBHelper.KEY_IDs);
@@ -171,13 +155,13 @@ public class vhod extends AppCompatActivity implements View.OnClickListener{
                     int realID = 1;
                     do {
                         if (cursorUpdater.getInt(idIndex) > realID) {
-                            contentValues.put(DBHelper.KEY_IDs, realID);
-                            contentValues.put(DBHelper.KEY_FIO, cursorUpdater.getString(FIOIndex));
-                            contentValues.put(DBHelper.KEY_USERs, cursorUpdater.getString(LoginIndex));
-                            contentValues.put(DBHelper.KEY_PASSWORDs, cursorUpdater.getString(PasswordIndex));
+                            contentValuesv.put(DBHelper.KEY_IDs, realID);
+                            contentValuesv.put(DBHelper.KEY_FIO, cursorUpdater.getString(FIOIndex));
+                            contentValuesv.put(DBHelper.KEY_USERs, cursorUpdater.getString(LoginIndex));
+                            contentValuesv.put(DBHelper.KEY_PASSWORDs, cursorUpdater.getString(PasswordIndex));
 
 
-                            database.replace(DBHelper.TABLE_SOTRYDNIK, null, contentValues);
+                            database.replace(DBHelper.TABLE_SOTRYDNIK, null, contentValuesv);
                         }
                         realID++;
                     } while (cursorUpdater.moveToNext());
