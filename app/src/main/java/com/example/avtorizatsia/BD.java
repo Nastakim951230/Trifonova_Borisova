@@ -124,7 +124,7 @@ public class BD extends AppCompatActivity implements View.OnClickListener{
 
             case R.id.btnClear:
                 database.delete(DBHelper.TABLE_CONTACTS, null, null);
-                TableLayout dbOutput=findViewById(R.id.Outrut);
+                TableLayout dbOutput=findViewById(R.id.dbOutput);
                 dbOutput.removeAllViews();
                 UpdateTable();
                 break;

@@ -50,15 +50,13 @@ public class vhod extends AppCompatActivity implements View.OnClickListener{
     }
     public void UpdateTable() {
         Cursor cursor = database.query(DBHelper.TABLE_SOTRYDNIK, null, null, null, null, null, null);
-        TableLayout dbOutput = findViewById(R.id.Outrut);
-        dbOutput.removeAllViews();
+        TableLayout Output = findViewById(R.id.Outrut);
+        Output.removeAllViews();
         if (cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex(DBHelper.KEY_IDs);
             int FIOIndex = cursor.getColumnIndex(DBHelper.KEY_FIO);
             int LoginIndex = cursor.getColumnIndex(DBHelper.KEY_USERs);
             int PasswordIndex = cursor.getColumnIndex(DBHelper.KEY_PASSWORDs);
-
-
             do {
                 TableRow dbOutputRow = new TableRow(this);
                 dbOutputRow.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -99,7 +97,7 @@ public class vhod extends AppCompatActivity implements View.OnClickListener{
                 deleteBtn.setId(cursor.getInt(idIndex));
                 dbOutputRow.addView(deleteBtn);
 
-                dbOutput.addView(dbOutputRow);
+                Output.addView(dbOutputRow);
 
             } while (cursor.moveToNext());
         }
@@ -125,8 +123,6 @@ public class vhod extends AppCompatActivity implements View.OnClickListener{
                 database.insert(DBHelper.TABLE_SOTRYDNIK, null, contentValuesv);
 
                 UpdateTable();
-
-
                 break;
 
             case R.id.btnClears: //Удаление данных из БД
@@ -173,7 +169,7 @@ public class vhod extends AppCompatActivity implements View.OnClickListener{
                 }
                 cursorUpdater.close();
                 break;
-            case R.id.snazad:
+            case R.id.snazad: //выход назад
                 Intent intent=new Intent(this,MainActivity.class);
                 startActivity(intent);
                 break;
