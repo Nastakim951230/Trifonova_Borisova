@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     String adminUser = "admin";
     String adminPassword = "admin";
-
+    String soUser = "so";
+    String soPassword = "so";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +85,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             loqqed = true;
                             break;
                         }
-
+                        if(usernameField.getText().toString().equals(soUser) && passwordField.getText().toString().equals(soPassword)) {
+                            startActivity(new Intent(this, BD.class));
+                            loqqed = true;
+                            break;
+                        }
                         if(usernameField.getText().toString().equals(logcursor.getString(usernameIndex))&& passwordField.getText().toString().equals(logcursor.getString(passwordIndex))){
                             startActivity(new Intent(this,tovar.class));
                             loqqed=true;
